@@ -2,7 +2,7 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemovePlugin = require('remove-files-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 const HardSourcePlugin = require('hard-source-webpack-plugin');
 
@@ -15,8 +15,7 @@ module.exports = function(env) {
     const entryPointFolder = path.resolve(__dirname, srcFolder, 'build');
 
     return {
-        entry: {
-        },
+        entry: `${srcFolder}/frontend/index.tsx`,
         output: {
             path: outputFolder
         },
@@ -51,14 +50,21 @@ module.exports = function(env) {
             new HardSourcePlugin({
                 cacheDirectory: path.resolve(__dirname, '.cache')
             }),
+            /*
             new CopyWebpackPlugin([
             ]),
+            */
             new RemovePlugin({
                 before: {
                     root: __dirname,
                     include: [outputFolder]
                 }
-            })
+            }),
+            new HTMLWebpackPlugin({
+                template: `${srcFolder}/frontend/index.pug`,
+                filename: 'index.html',
+                inject: false
+            }),
         ],
         resolve: {
             alias: {
@@ -77,6 +83,10 @@ module.exports = function(env) {
                 '.css', '.scss',
                 '.html', '.pug'
             ]
+        },
+        externals: {
+            "react": "React",
+            "react-dom": "ReactDOM"
         }
     }
 }

@@ -2,7 +2,10 @@
     "name": "some-games",
     "version": "alpha",
     "description": "",
-    "scripts": {},
+    "scripts": {
+        "build:prod": "webpack --config webpack.config.prod",
+        "build:dev": "webpack --config webpack.config.dev"
+    },
     "private": true,
     "engines": {
         "node": ">=10.15.3",
