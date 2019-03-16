@@ -17,6 +17,8 @@
         "node-sass": "^4.11.0",
         "pug": "^2.0.3",
         "pug-loader": "^2.4.0",
+        "react": "^16.8.4",
+        "react-dom": "^16.8.4",
         "remove-files-webpack-plugin": "^1.0.0",
         "sass-loader": "^7.1.0",
         "typescript": "^3.3.3333",
@@ -28,6 +30,8 @@
         "@types/hard-source-webpack-plugin": "^1.0.0",
         "@types/html-webpack-plugin": "^3.2.0",
         "@types/mini-css-extract-plugin": "^0.2.0",
+        "@types/react": "^16.8.8",
+        "@types/react-dom": "^16.8.2",
         "@types/webpack-merge": "^4.1.3"
     }
 }
