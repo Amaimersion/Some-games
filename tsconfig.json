@@ -23,7 +23,8 @@
         "removeComments": true,
         "typeRoots": [
             "./node_modules/@types"
-        ]
+        ],
+        "jsx": "react"
     },
     "awesomeTypescriptLoaderOptions": {
         "useCache": true,
