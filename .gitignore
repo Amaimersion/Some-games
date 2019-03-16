@@ -3,3 +3,7 @@ node_modules
 
 # Build directory.
 dist
+
+# Unnecessary files and folders.
+.awcache
+.cache
