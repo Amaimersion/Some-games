@@ -1,28 +1,49 @@
+block vars
+  - var year = "2019";
+  - var title = "Some Games";
+
+
 block mixins
   mixin css(href)
-    link(rel="stylesheet" href=href)&attributes(attributes)
+    link(
+      rel="stylesheet"
+      href=href
+    )&attributes(attributes)
 
-  mixin js(src)
-    script(src=src)&attributes(attributes)
+  mixin js(src, props={})
+    script(
+      defer=props.defer
+      async=props.async
+      src=src
+    )&attributes(attributes)
 
   mixin js-defer(src)
-    script(defer src=src)&attributes(attributes)
+    +js(
+      src,
+      {defer: true}
+    )&attributes(attributes)
 
   mixin js-async(src)
-    script(async src=src)&attributes(attributes)
+    +js(
+      src,
+      {async: true}
+    )&attributes(attributes)
 
 
 <!DOCTYPE html>
+html(
+  class=htmlClass
+  lang=htmlLang ? htmlLang : "en"
+)
 
-html(class=htmlClass ? htmlClass : "" lang=htmlLang ? htmlLang : "en")
   head
     block head
       meta(charset="UTF-8")
-      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0, shrink-to-fit=no")
       meta(http-equiv="X-UA-Compatible", content="ie=edge")
       title=title ? title : "Some Games"
 
-  body(class=bodyClass ? bodyClass : "")
+  body(class=bodyClass)
     block body
       block header
       block main
