@@ -63,7 +63,8 @@ module.exports = function(env) {
             new HTMLWebpackPlugin({
                 template: `${srcFolder}/frontend/html/index.pug`,
                 filename: 'index.html',
-                inject: false
+                inject: false,
+                production: (env.NODE_ENV === 'production')
             }),
         ],
         resolve: {

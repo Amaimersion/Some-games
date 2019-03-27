@@ -4,6 +4,7 @@ const merge = require('webpack-merge');
 
 module.exports = function(env) {
     env = env || {};
+    env.NODE_ENV = 'production';
 
     const commonConfig = require('./webpack.config.common')(env);
 
