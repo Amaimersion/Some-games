@@ -15,7 +15,7 @@ module.exports = function(env) {
     const entryPointFolder = path.resolve(__dirname, srcFolder, 'build');
 
     return {
-        entry: `${srcFolder}/frontend/index.tsx`,
+        entry: `${srcFolder}/frontend/js/index.tsx`,
         output: {
             path: outputFolder
         },
@@ -61,7 +61,7 @@ module.exports = function(env) {
                 }
             }),
             new HTMLWebpackPlugin({
-                template: `${srcFolder}/frontend/index.pug`,
+                template: `${srcFolder}/frontend/html/index.pug`,
                 filename: 'index.html',
                 inject: false
             }),
