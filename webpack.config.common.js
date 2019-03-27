@@ -15,7 +15,9 @@ module.exports = function(env) {
     const entryPointFolder = path.resolve(__dirname, srcFolder, 'build');
 
     return {
-        entry: `${srcFolder}/frontend/js/index.tsx`,
+        entry: {
+            'index': `${srcFolder}/build/index.js`
+        },
         output: {
             path: outputFolder
         },
@@ -66,9 +68,15 @@ module.exports = function(env) {
                 inject: false,
                 production: (env.NODE_ENV === 'production')
             }),
+            new MiniCssExtractPlugin({
+                filename: '[name].css'
+            })
         ],
         resolve: {
             alias: {
+                '@interfaceHTML': `${srcFolder}/frontend/html`,
+                '@interfaceCSS': `${srcFolder}/frontend/css`,
+                '@interfaceJS': `${srcFolder}/frontend/js`
             },
             plugins: [
                 /*
