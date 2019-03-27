@@ -1,0 +1,9 @@
+//- Expected an earlier extends with `html5.pug`.
+
+
+if (htmlWebpackPlugin.options.production)
+  +js-defer("https://unpkg.com/react@16/umd/react.production.min.js")(crossorigin)
+  +js-defer("https://unpkg.com/react-dom@16/umd/react-dom.production.min.js")(crossorigin)
+else
+  +js-defer("https://unpkg.com/react@16/umd/react.development.js")(crossorigin)
+  +js-defer("https://unpkg.com/react-dom@16/umd/react-dom.development.js")(crossorigin)
