@@ -2,10 +2,12 @@ extends ./_common/html5
 
 
 block append head
-  //-include ./_common/react
   +css("index.css")
-  //-+js-defer("index.js")
 
 
-block append main
-  main(id="root")
+block append header
+  include ./_common/header
+
+
+block append footer
+  include ./_common/footer
