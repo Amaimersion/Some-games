@@ -1,0 +1,34 @@
+@import "mixins.scss";
+
+
+.custom-header {
+  @include zeroize;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+
+.custom-header-title {
+  flex-grow: 1;
+
+  p {
+    margin: 0;
+    padding: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+}
+
+
+.custom-header-games {
+  display: flex;
+  flex-grow: 3;
+  flex-wrap: wrap;
+
+  a {
+    padding: 0 1rem;
+    text-decoration: none;
+  }
+}
