@@ -1,0 +1,8 @@
+@import "mixins.scss";
+
+
+.custom-footer {
+  @include zeroize;
+  display: flex;
+  justify-content: space-evenly;
+}
