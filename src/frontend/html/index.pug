@@ -1,12 +1,21 @@
 extends ./_common/html5
 
 
+block append vars
+  - var bodyClass = "custom-sticky-footer";
+
+
 block append head
   +css("index.css")
 
 
 block append header
   include ./_common/header
+
+
+block append main
+  main
+    h1="Main"
 
 
 block append footer
