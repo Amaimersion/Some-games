@@ -28,17 +28,20 @@ module.exports = function(env) {
                     loader: 'pug-loader'
                 },
                 {
-                    test: /\.css$/,
-                    use: [
-                        MiniCssExtractPlugin.loader,
-                        'css-loader'
-                    ]
-                },
-                {
                     test: /\.s(c|a)ss$/,
                     use: [
                         MiniCssExtractPlugin.loader,
                         'css-loader',
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: [
+                                    require('autoprefixer')({
+                                        'browsers': ['> 1%', 'last 2 versions']
+                                    })
+                                ]
+                            }
+                        },
                         'sass-loader'
                     ]
                 },
