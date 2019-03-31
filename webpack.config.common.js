@@ -16,7 +16,8 @@ module.exports = function(env) {
 
     return {
         entry: {
-            'index': `${srcFolder}/build/index.js`
+            'index': `${srcFolder}/build/index.js`,
+            'tic-tac-toe': `${srcFolder}/build/tic-tac-toe.js`
         },
         output: {
             path: outputFolder
@@ -68,6 +69,12 @@ module.exports = function(env) {
             new HTMLWebpackPlugin({
                 template: `${srcFolder}/frontend/html/index.pug`,
                 filename: 'index.html',
+                inject: false,
+                production: (env.NODE_ENV === 'production')
+            }),
+            new HTMLWebpackPlugin({
+                template: `${srcFolder}/frontend/html/tic-tac-toe.pug`,
+                filename: 'tic-tac-toe.html',
                 inject: false,
                 production: (env.NODE_ENV === 'production')
             }),
