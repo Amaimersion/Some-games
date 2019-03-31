@@ -6,4 +6,14 @@ block append head
 
 
 block append main
-  main
+  main(id="root")
+    div(class="custom-game-container")
+      div(class="custom-game-board")
+        each i in [1, 2, 3]
+          div(class="custom-game-row")
+            each j in [1, 2, 3]
+              div(class="custom-game-col")
+                if ((i + j) % 2 == 0)
+                  ='X'
+                else
+                  ='O'
