@@ -4,17 +4,18 @@ extends ./_common/html5
 block append head
   +css("tic-tac-toe.css")
   include /_common/react
+  +js-defer("tic-tac-toe.js")
 
 
 block append main
   main(id="root")
+  //-
     div(class="custom-game-container")
       div(class="custom-game-board")
         each i in [1, 2, 3]
           div(class="custom-game-row")
             each j in [1, 2, 3]
               div(class="custom-game-col")
-              //-
                 if ((i + j) % 2 == 0)
                   ='X'
                 else
