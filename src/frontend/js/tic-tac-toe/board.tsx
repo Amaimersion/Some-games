@@ -1,32 +1,39 @@
 import * as React from "react";
+import {GameState, GamePosition, SquareClick} from "./game";
+import {Square} from "./square";
 
 
-type BoardState = {
-    rowCount: number;
-    colCount: number;
+type BoardProps = {
+    rowCount: GameState["rowCount"];
+    colCount: GameState["colCount"];
+    squares: GamePosition["squares"];
+    squareClick: SquareClick;
 };
 
 
-export default class Board extends React.Component<{}, BoardState> {
-    constructor(props: any) {
+export class Board extends React.Component<BoardProps, {}> {
+    constructor(props: Readonly<BoardProps>) {
         super(props);
-
-        this.state = {
-            rowCount: 3,
-            colCount: 3
-        };
     }
 
     public render(): JSX.Element {
-        const rows = new Array(this.state.rowCount).fill(null).map((_value, rowIndex) => {
-            const cols = new Array(this.state.colCount).fill(null).map((_value, colIndex) => {
-                return (
-                    <div
+        let squareIndex = 0;
+
+        const rows = new Array(this.props.rowCount).fill(null).map((_value, rowIndex) => {
+            const cols = new Array(this.props.colCount).fill(null).map((_value, colIndex) => {
+                const element = (
+                    <Square
                         key={`col-${rowIndex}-${colIndex}`}
                         className="custom-game-col"
-                    >
-                    </div>
+                        value={this.props.squares[squareIndex]}
+                        onClick={this.props.squareClick}
+                        squareIndex={squareIndex}
+                    />
                 );
+
+                squareIndex++;
+
+                return element;
             });
 
             return (
