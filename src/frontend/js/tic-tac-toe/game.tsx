@@ -9,6 +9,7 @@ export type GameState = {
     nextPlayer: number;
     history: GamePosition[];
     currentMove: number;
+    winLine: number[];
 };
 
 
@@ -17,6 +18,11 @@ export interface GamePosition {
     change: string;
 }
 
+
+export interface Winner {
+    player: string | undefined;
+    line: number[];
+}
 
 export type SquareClick = (
     squareIndex: number
@@ -33,7 +39,8 @@ export class Game extends React.Component<{}, GameState> {
             players: ["X", "Y"],
             nextPlayer: 0,
             history: [],
-            currentMove: 0
+            currentMove: 0,
+            winLine: []
         };
 
         this.move = this.move.bind(this);
@@ -57,6 +64,7 @@ export class Game extends React.Component<{}, GameState> {
                     colCount={this.state.colCount}
                     squares={squares}
                     squareClick={this.move}
+                    winLine={this.state.winLine}
                 />
             </div>
         );
@@ -76,7 +84,7 @@ export class Game extends React.Component<{}, GameState> {
 
         const squares = history[history.length - 1].squares.slice();
 
-        if (squares[squareIndex]) {
+        if (squares[squareIndex] || this.state.winLine.length) {
             return;
         }
 
@@ -97,11 +105,90 @@ export class Game extends React.Component<{}, GameState> {
             squares: squares,
             change: change
         }]);
+        const winner = this.determineWinner(squares);
 
         this.setState({
             history: history,
             nextPlayer: nextPlayer,
-            currentMove: history.length
+            currentMove: history.length,
+            winLine: winner.line
         });
+    }
+
+    protected determineWinner(squares: GamePosition["squares"]): Winner {
+        const isWin = (i: number, value: number): boolean => {
+            return (!!squares[i] && squares[i] === squares[value]);
+        };
+
+        if (this.state.rowCount === this.state.colCount) {
+            const diagonalLeft = Array.from({length: this.state.rowCount}, (_value, index) => {
+                return ((this.state.rowCount + 1) * index);
+            });
+            let i = diagonalLeft[0];
+            const leftIsWin = diagonalLeft.every((value) => {
+                return isWin(i, value);
+            });
+
+            if (leftIsWin) {
+                return {
+                    player: squares[i],
+                    line: diagonalLeft
+                };
+            }
+
+            const diagonalRight = Array.from({length: this.state.rowCount}, (_value, index) => {
+                return ((this.state.rowCount - 1) * (index + 1));
+            });
+            i = diagonalRight[0];
+            const rightIsWin = diagonalRight.every((value) => {
+                return isWin(i, value);
+            });
+
+            if (rightIsWin) {
+                return {
+                    player: squares[i],
+                    line: diagonalRight
+                };
+            }
+        }
+
+        for (let i = 0; i !== this.state.rowCount; i++) {
+            const row = Array.from({length: this.state.colCount}, (_value, index) => {
+                return (index + this.state.colCount * i);
+            });
+            const j = row[0];
+            const rowIsWin = row.every((value: number) => {
+                return isWin(j, value);
+            });
+
+            if (rowIsWin) {
+                return {
+                    player: squares[j],
+                    line: row
+                };
+            }
+        }
+
+        for (let i = 0; i !== this.state.colCount; i++) {
+            const col = Array.from({length: this.state.rowCount}, (_value, index) => {
+                return (i + this.state.colCount * index);
+            });
+            const j = col[0];
+            const colIsWin = col.every((value: number) => {
+                return isWin(j, value);
+            });
+
+            if (colIsWin) {
+                return {
+                    player: squares[j],
+                    line: col
+                };
+            }
+        }
+
+        return {
+            player: undefined,
+            line: []
+        };
     }
 }

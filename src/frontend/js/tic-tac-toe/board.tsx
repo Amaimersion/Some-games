@@ -8,6 +8,7 @@ type BoardProps = {
     colCount: GameState["colCount"];
     squares: GamePosition["squares"];
     squareClick: SquareClick;
+    winLine: GameState["winLine"]
 };
 
 
@@ -24,10 +25,10 @@ export class Board extends React.Component<BoardProps, {}> {
                 const element = (
                     <Square
                         key={`col-${rowIndex}-${colIndex}`}
-                        className="custom-game-col"
                         value={this.props.squares[squareIndex]}
                         onClick={this.props.squareClick}
                         squareIndex={squareIndex}
+                        isWin={this.props.winLine.includes(squareIndex)}
                     />
                 );
 
