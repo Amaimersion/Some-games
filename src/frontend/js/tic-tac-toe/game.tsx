@@ -72,6 +72,40 @@ export class Game extends React.Component<{}, GameState> {
                     {this.createStatus()}
                 </p>
 
+                <input
+                    type="text"
+                    value={this.state.players.join(" ")}
+                    onChange={(event) => {
+                        this.setState({
+                            players: event.target.value.split(/[ ]+/)
+                        });
+                    }}
+                />
+                <input
+                    type="range"
+                    value={this.state.rowCount}
+                    min={2}
+                    max={15}
+                    step={1}
+                    onChange={(event) => {
+                        this.setState({
+                            rowCount: Number(event.target.value)
+                        });
+                    }}
+                />
+                <input
+                    type="range"
+                    value={this.state.colCount}
+                    min={2}
+                    max={15}
+                    step={1}
+                    onChange={(event) => {
+                        this.setState({
+                            colCount: Number(event.target.value)
+                        });
+                    }}
+                />
+
                 <Board
                     rowCount={this.state.rowCount}
                     colCount={this.state.colCount}
