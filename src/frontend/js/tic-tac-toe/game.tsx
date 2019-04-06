@@ -9,7 +9,7 @@ export type GameState = {
     nextPlayer: number;
     history: GamePosition[];
     currentMove: number;
-    winLine: number[];
+    winner: Winner;
 };
 
 
@@ -40,7 +40,10 @@ export class Game extends React.Component<{}, GameState> {
             nextPlayer: 0,
             history: [],
             currentMove: 0,
-            winLine: []
+            winner: {
+                player: undefined,
+                line: []
+            }
         };
 
         this.move = this.move.bind(this);
@@ -59,12 +62,18 @@ export class Game extends React.Component<{}, GameState> {
             <div
                 className="custom-game-container"
             >
+                <p
+                    className="custom-game-status"
+                >
+                    {this.createStatus()}
+                </p>
+
                 <Board
                     rowCount={this.state.rowCount}
                     colCount={this.state.colCount}
                     squares={squares}
                     squareClick={this.move}
-                    winLine={this.state.winLine}
+                    winLine={this.state.winner.line}
                 />
             </div>
         );
@@ -84,15 +93,11 @@ export class Game extends React.Component<{}, GameState> {
 
         const squares = history[history.length - 1].squares.slice();
 
-        if (squares[squareIndex] || this.state.winLine.length) {
+        if (squares[squareIndex] || this.state.winner.line.length) {
             return;
         }
 
         let nextPlayer = this.state.nextPlayer;
-
-        if (nextPlayer >= this.state.players.length) {
-            nextPlayer = 0;
-        }
 
         const player = this.state.players[nextPlayer];
         const change = (
@@ -107,11 +112,15 @@ export class Game extends React.Component<{}, GameState> {
         }]);
         const winner = this.determineWinner(squares);
 
+        if (nextPlayer >= this.state.players.length) {
+            nextPlayer = 0;
+        }
+
         this.setState({
             history: history,
             nextPlayer: nextPlayer,
             currentMove: history.length,
-            winLine: winner.line
+            winner: winner
         });
     }
 
@@ -190,5 +199,23 @@ export class Game extends React.Component<{}, GameState> {
             player: undefined,
             line: []
         };
+    }
+
+    protected createStatus(): string {
+        const winner = this.state.winner;
+        const currentMove = this.state.currentMove;
+        const totalMoves = this.state.rowCount * this.state.colCount;
+        const nextPlayer = this.state.nextPlayer;
+        let status = "";
+
+        if (winner.player) {
+            status = `Winner: ${winner.player}`;
+        } else if (currentMove <= totalMoves) {
+            status = `Next player turn: ${this.state.players[nextPlayer]}`;
+        } else {
+            status = "Draw";
+        }
+
+        return status;
     }
 }
