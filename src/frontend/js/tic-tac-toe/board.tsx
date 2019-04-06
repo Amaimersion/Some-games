@@ -1,5 +1,5 @@
 import * as React from "react";
-import {GameState, GamePosition, SquareClick} from "./game";
+import {GameState, GamePosition, SquareClick, Winner} from "./game";
 import {Square} from "./square";
 
 
@@ -8,7 +8,7 @@ type BoardProps = {
     colCount: GameState["colCount"];
     squares: GamePosition["squares"];
     squareClick: SquareClick;
-    winLine: GameState["winLine"]
+    winLine: Winner["line"];
 };
 
 
