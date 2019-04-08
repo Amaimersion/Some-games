@@ -1,7 +1,5 @@
 {
     "name": "some-games",
-    "version": "alpha",
-    "description": "",
     "scripts": {
         "build:prod": "webpack --config webpack.config.prod",
         "build:dev": "webpack --config webpack.config.dev",
