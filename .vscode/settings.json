@@ -1,4 +1,7 @@
 {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "EditorConfig.EditorConfig",
+    "typescript.tsdk": "node_modules\\typescript\\lib",
     "files.exclude": {
         // folders.
         "node_modules": true,
@@ -22,6 +25,5 @@
         "**/dist": true,
         ".awcache": true,
         ".cache": true
-    },
-    "typescript.tsdk": "node_modules\\typescript\\lib"
+    }
 }
