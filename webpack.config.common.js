@@ -2,7 +2,6 @@ const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const RemovePlugin = require('remove-files-webpack-plugin');
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
 const HardSourcePlugin = require('hard-source-webpack-plugin');
 
@@ -10,17 +9,26 @@ const HardSourcePlugin = require('hard-source-webpack-plugin');
 module.exports = function(env) {
     env = env || {};
 
-    const srcFolder = path.resolve(__dirname, 'src');
-    const outputFolder = path.resolve(__dirname, 'dist');
-    const entryPointFolder = path.resolve(__dirname, srcFolder, 'build');
+    const isProduction = (env.NODE_ENV === 'production');
+    const folder = {
+        src: path.resolve(__dirname, 'src'),
+        output: path.resolve(__dirname, 'dist'),
+        entry: path.resolve(__dirname, 'src', 'build'),
+        frontend: path.resolve(__dirname, 'src', 'frontend'),
+        hardSourceCache: path.resolve(__dirname, '.cache')
+    };
+    const HTMLPluginCommonOptions = {
+        inject: false,
+        production: isProduction
+    };
 
     return {
         entry: {
-            'index': `${srcFolder}/build/index.js`,
-            'tic-tac-toe': `${srcFolder}/build/tic-tac-toe.js`
+            'index': `${folder.entry}/index.js`,
+            'tic-tac-toe': `${folder.entry}/tic-tac-toe.js`
         },
         output: {
-            path: outputFolder
+            path: folder.output
         },
         module: {
             rules: [
@@ -54,29 +62,24 @@ module.exports = function(env) {
         },
         plugins: [
             new HardSourcePlugin({
-                cacheDirectory: path.resolve(__dirname, '.cache')
+                cacheDirectory: folder.hardSourceCache
             }),
-            /*
-            new CopyWebpackPlugin([
-            ]),
-            */
             new RemovePlugin({
                 before: {
-                    root: __dirname,
-                    include: [outputFolder]
+                    include: [
+                        folder.output
+                    ]
                 }
             }),
             new HTMLWebpackPlugin({
-                template: `${srcFolder}/frontend/html/index.pug`,
-                filename: 'index.html',
-                inject: false,
-                production: (env.NODE_ENV === 'production')
+                ...HTMLPluginCommonOptions,
+                template: `${folder.frontend}/html/index.pug`,
+                filename: 'index.html'
             }),
             new HTMLWebpackPlugin({
-                template: `${srcFolder}/frontend/html/tic-tac-toe.pug`,
-                filename: 'tic-tac-toe.html',
-                inject: false,
-                production: (env.NODE_ENV === 'production')
+                ...HTMLPluginCommonOptions,
+                template: `${folder.frontend}/html/tic-tac-toe.pug`,
+                filename: 'tic-tac-toe.html'
             }),
             new MiniCssExtractPlugin({
                 filename: '[name].css'
@@ -84,9 +87,9 @@ module.exports = function(env) {
         ],
         resolve: {
             alias: {
-                '@interfaceHTML': `${srcFolder}/frontend/html`,
-                '@interfaceCSS': `${srcFolder}/frontend/css`,
-                '@interfaceJS': `${srcFolder}/frontend/js`
+                '@frontendHTML': `${folder.frontend}/html`,
+                '@frontendCSS': `${folder.frontend}/css`,
+                '@frontendJS': `${folder.frontend}/js`
             },
             plugins: [
                 /*

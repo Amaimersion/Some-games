@@ -1,5 +1,5 @@
-import '@interfaceCSS/tic-tac-toe.scss';
-import '@interfaceJS/tic-tac-toe/_index.tsx';
+import '@frontendCSS/tic-tac-toe.scss';
+import '@frontendJS/tic-tac-toe/_index.tsx';
 
-// in webpack.config.common.js.
-// import '@interfaceHTML/tic-tac-toe.pug';
+// in `webpack.config.common.js`.
+// import '@frontendHTML/tic-tac-toe.pug';
