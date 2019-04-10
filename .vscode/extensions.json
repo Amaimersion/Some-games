@@ -1,8 +1,6 @@
 {
     "recommendations": [
         "EditorConfig.editorconfig",
-        "mrmlnc.vscode-jade-snippets",
-        "mrmlnc.vscode-scss",
         "eg2.tslint"
     ]
 }
