@@ -1,6 +1,7 @@
 {
     "name": "some-games",
     "scripts": {
+        "build": "yarn tslint && yarn build:prod",
         "build:prod": "webpack --config webpack.config.prod",
         "build:dev": "webpack --config webpack.config.dev",
         "watch:prod": "webpack --watch --config webpack.config.prod",
