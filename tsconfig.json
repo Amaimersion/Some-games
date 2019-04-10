@@ -11,6 +11,7 @@
         "baseUrl": "./",
         "paths": {
         },
+        "jsx": "react",
         "alwaysStrict": true,
         "strictNullChecks": true,
         "disableSizeLimit": true,
@@ -23,8 +24,7 @@
         "removeComments": true,
         "typeRoots": [
             "./node_modules/@types"
-        ],
-        "jsx": "react"
+        ]
     },
     "awesomeTypescriptLoaderOptions": {
         "useCache": true,
