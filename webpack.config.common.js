@@ -13,7 +13,7 @@ module.exports = function(env) {
     const folder = {
         src: path.resolve(__dirname, 'src'),
         output: path.resolve(__dirname, 'dist'),
-        entry: path.resolve(__dirname, 'src', 'build'),
+        entryFrontend: path.resolve(__dirname, 'src', 'build', 'frontend'),
         frontend: path.resolve(__dirname, 'src', 'frontend'),
         hardSourceCache: path.resolve(__dirname, '.cache')
     };
@@ -24,8 +24,8 @@ module.exports = function(env) {
 
     return {
         entry: {
-            'index': `${folder.entry}/index.js`,
-            'tic-tac-toe': `${folder.entry}/tic-tac-toe.js`
+            'index': `${folder.entryFrontend}/index.js`,
+            'tic-tac-toe': `${folder.entryFrontend}/tic-tac-toe.js`
         },
         output: {
             path: folder.output
