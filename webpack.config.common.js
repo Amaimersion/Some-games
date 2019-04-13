@@ -73,12 +73,12 @@ module.exports = function(env) {
             }),
             new HTMLWebpackPlugin({
                 ...HTMLPluginCommonOptions,
-                template: `${folder.frontend}/html/index.pug`,
+                template: `${folder.frontend}/html/index/index.pug`,
                 filename: 'index.html'
             }),
             new HTMLWebpackPlugin({
                 ...HTMLPluginCommonOptions,
-                template: `${folder.frontend}/html/tic-tac-toe.pug`,
+                template: `${folder.frontend}/html/tic-tac-toe/tic-tac-toe.pug`,
                 filename: 'tic-tac-toe.html'
             }),
             new MiniCssExtractPlugin({

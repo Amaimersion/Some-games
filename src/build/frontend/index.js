@@ -1,5 +1,5 @@
-import '@frontendCSS/index.scss';
-import '@frontendJS/index.tsx';
+import '@frontendCSS/index/index.scss';
+import '@frontendJS/index/index.tsx';
 
 // in `webpack.config.common.js`.
-// import '@frontendHTML/index.pug';
+// import '@frontendHTML/index/index.pug';
