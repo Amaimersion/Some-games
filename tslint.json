@@ -96,7 +96,10 @@
         "encoding": true,
         "file-name-casing": [
             true,
-            "kebab-case"
+            {
+                "^_[^_]+": "snake-case", // like `_index.ts`.
+                ".*": "kebab-case" // all the rest.
+            }
         ],
         "import-spacing": false,
         "interface-name": false,
