@@ -1,12 +1,13 @@
 {
     "name": "some-games",
     "scripts": {
-        "build": "yarn tslint && yarn build:prod",
-        "build:prod": "webpack --config webpack.config.prod",
-        "build:dev": "webpack --config webpack.config.dev",
-        "watch:prod": "webpack --watch --config webpack.config.prod",
-        "watch:dev": "webpack --watch --config webpack.config.dev",
-        "server": "webpack-dev-server --config webpack.config.dev",
+        "build": "yarn tslint && yarn build:frontend:prod",
+        "build:frontend:prod": "webpack --config webpack.config.prod",
+        "build:frontend:dev": "webpack --config webpack.config.dev",
+        "watch:frontend:prod": "webpack --watch --config webpack.config.prod",
+        "watch:frontend:dev": "webpack --watch --config webpack.config.dev",
+        "server:frontend:prod": "webpack-dev-server --config webpack.config.prod",
+        "server:frontend:dev": "webpack-dev-server --config webpack.config.dev",
         "tslint": "tslint -c tslint.json -p tsconfig.json"
     },
     "private": true,
